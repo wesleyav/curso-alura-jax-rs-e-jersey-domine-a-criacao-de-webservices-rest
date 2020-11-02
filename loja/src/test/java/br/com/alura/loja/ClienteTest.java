@@ -8,11 +8,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.filter.LoggingFilter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.sun.prism.impl.Disposer.Target;
 import com.thoughtworks.xstream.XStream;
 
 import br.com.alura.loja.modelo.Carrinho;
@@ -28,7 +29,9 @@ public class ClienteTest {
 	@Before
 	public void startaServidor() {
 		server = Servidor.inicializaServidor();
-		this.client = ClientBuilder.newClient();
+		ClientConfig config = new ClientConfig();
+		config.register(new LoggingFilter());
+		this.client = ClientBuilder.newClient(config);
 		this.target = client.target("http://localhost:8080");
 	}
 
