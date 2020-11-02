@@ -18,6 +18,7 @@ import com.thoughtworks.xstream.XStream;
 
 import br.com.alura.loja.modelo.Carrinho;
 import br.com.alura.loja.modelo.Produto;
+import br.com.alura.loja.modelo.Projeto;
 import junit.framework.Assert;
 
 public class ClienteTest {
@@ -62,7 +63,14 @@ public class ClienteTest {
 		String location = response.getHeaderString("Location");
 		Carrinho carrinhoCarregado = client.target(location).request().get(Carrinho.class);
 		Assert.assertEquals("Microfone", carrinhoCarregado.getProdutos().get(0).getNome());
-		
 	}
+	
+	@Test
+    public void testaQueAConexaoComOServidorFuncionaNoPathDeProjetos() {
+        WebTarget target = client.target("http://localhost:8080");
+        Projeto projeto = target.path("/projetos/1").request().get(Projeto.class);
+        Assert.assertEquals(1L, projeto.getId(),0);
+
+    }
 
 }

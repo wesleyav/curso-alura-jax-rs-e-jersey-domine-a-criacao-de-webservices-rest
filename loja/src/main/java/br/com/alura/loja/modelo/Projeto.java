@@ -1,7 +1,13 @@
 package br.com.alura.loja.modelo;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.thoughtworks.xstream.XStream;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Projeto {
 
 	private String nome;
@@ -16,6 +22,10 @@ public class Projeto {
 
 	public Projeto(long l, String string, int anoDeInicio2) {
 
+	}
+	
+	public Projeto (){
+		
 	}
 
 	public String getNome() {
